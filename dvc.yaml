@@ -1,0 +1,19 @@
+stages:
+  prepare:
+    cmd: python src/prepare_data.py
+    deps:
+      - src/prepare_data.py
+    params:
+      - data.data_dir
+    outs:
+      - data/
+   
+  train:
+    cmd: python src/train.py
+    deps:
+      - data/
+      - src/train.py
+    params:
+      - train.learning_rate
+      - train.batch_size
+      - train.epochs

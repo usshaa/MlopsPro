@@ -1,0 +1,9 @@
+data:
+  dataset_name: "CIFAR10"
+  data_dir: "./data"
+
+
+train:
+  batch_size: 64
+  learning_rate: 0.001
+  epochs: 5
