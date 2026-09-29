@@ -18,11 +18,11 @@ def prepare_data():
     
     print("Checking local cache for real CIFAR-10 images...")
     # PyTorch will check 'cache_dir'. If it exists, it skips downloading instantly!
-    full_dataset = datasets.CIFAR10(root=cache_dir, train=True, download=True)
+    full_dataset = datasets.CIFAR10(root=cache_dir, train=True, download=True) # 170 MB
     
     # Extract only the first 200 real images and labels
-    real_images = torch.tensor(full_dataset.data[:200]).permute(0, 3, 1, 2).float() / 255.0
-    real_labels = torch.tensor(full_dataset.targets[:200])
+    real_images = torch.tensor(full_dataset.data[:300]).permute(0, 3, 1, 2).float() / 255.0
+    real_labels = torch.tensor(full_dataset.targets[:300])
     
     # Save the tiny sub-slice (<1MB) into the clean DVC directory
     torch.save({"images": real_images, "labels": real_labels}, os.path.join(data_dir, "real_dataset.pt"))

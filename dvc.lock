@@ -5,31 +5,31 @@ stages:
     deps:
     - path: src/prepare_data.py
       hash: md5
-      md5: abcda429f99a0b354ed4801955b89a0b
-      size: 1381
+      md5: 95f684009951528b89855831a87736e5
+      size: 1390
     params:
       params.yaml:
         data.data_dir: ./data
     outs:
     - path: data/
       hash: md5
-      md5: 2196c347d17730276e0e1bee6b8cc403.dir
-      size: 2461133
+      md5: 4668f4ba2bfc2c5df9c5c65c1f647aca.dir
+      size: 3690701
       nfiles: 1
   train:
     cmd: python src/train.py
     deps:
     - path: data/
       hash: md5
-      md5: 2196c347d17730276e0e1bee6b8cc403.dir
-      size: 2461133
+      md5: 4668f4ba2bfc2c5df9c5c65c1f647aca.dir
+      size: 3690701
       nfiles: 1
     - path: src/train.py
       hash: md5
-      md5: 7bf6116fbd68225bf197c4742679411c
-      size: 3118
+      md5: 0e0d68936ff1cdb1576c8f356651cbb5
+      size: 3291
     params:
       params.yaml:
-        train.batch_size: 64
+        train.batch_size: 32
         train.epochs: 5
         train.learning_rate: 0.001

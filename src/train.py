@@ -30,7 +30,7 @@ def train_model():
     train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True)
 
     # 3. Define Simple CNN Model
-    model = models.resnet18(num_classes=10)
+    model = models.resnet18(num_classes=10) #  ip, n_cnn (frozen), fully connected layer(trainable parameters)
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=lr)
 
@@ -56,9 +56,9 @@ def train_model():
             
             for inputs, labels in train_loader:
                 optimizer.zero_grad()
-                outputs = model(inputs)
-                loss = criterion(outputs, labels)
-                loss.backward()
+                outputs = model(inputs) # resnet - extract features but no learnable parameters
+                loss = criterion(outputs, labels) # loss criterion
+                loss.backward() 
                 optimizer.step()
                 
                 running_loss += loss.item() * inputs.size(0)
@@ -70,8 +70,8 @@ def train_model():
             epoch_acc = correct / total
             
             # Log metrics per epoch to MLflow
-            mlflow.log_metric("loss", epoch_loss, step=epoch)
-            mlflow.log_metric("accuracy", epoch_acc, step=epoch)
+            mlflow.log_metric("loss", float(epoch_loss), step=int(epoch + 1))
+            mlflow.log_metric("accuracy", float(epoch_acc), step=int(epoch + 1))
             print(f"Epoch {epoch+1}/{epochs} - Loss: {epoch_loss:.4f} - Acc: {epoch_acc:.4f}")
 
         # Log the trained model weights directly to MLflow

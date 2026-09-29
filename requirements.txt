@@ -1,5 +1,5 @@
 torch
 torchvision
-dvc
-mlflow
-pyyaml
+dvc # v1,v2
+mlflow # v1,v2
+pyyaml # DAG - > pipeline
